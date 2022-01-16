@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<header>
+ <title>
+     Sort An Array
+ </title>    
+</header>
+<body>
+  <h2>Enter an array<h4> YOU MUST Enter array as following [1, 9, 8, 5, 6, 7] </h4></h2> 
+  <hr>
+  <div>
+  <label>The array <input  type="text" id="array" > </input> </label>
+  <button id="btn" <ion-text color="primary">
+      <p> Sort that array </p>
+  </ion-text> </button>
+  
+</div> 
+<hr>
+<div>
+<textarea id="sh" row=300> </textarea>
+</div>
+<hr>
+<div>
+<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Merge-Sort-Tutorial.png"  height="400" alt="Not found">
+<a href="https://www.geeksforgeeks.org/merge-sort/"><h1>Source </h1></a>
+<iframe width="727" height="409" src="https://www.youtube.com/embed/3P43wofKYOM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+ </div>
+
+    
+<script>
+function merge(arr, l, m, r){
+   
+var first_size=m-l+1;
+var secand_size=r-m;   
+var i=0;
+var j=0;
+var k=l;
+var arr1=new Array(first_size);
+var arr2=new Array(secand_size);
+for(let i=0;i<first_size;i++){
+    arr1[i]=arr[l+i];
+
+}
+for(let j=0;j<secand_size;j++){
+    arr2[j]=arr[m+1+j];
+}
+
+ while( i<arr1.length && j<arr2.length){
+   
+   if(arr1[i]<=arr2[j]){
+       arr[k]=arr1[i];
+       i++;
+   }
+
+   else{
+       arr[k]=arr2[j];
+       j++;
+   }
+   k++;
+ }
+
+while(i<arr1.length){
+  arr[k]=arr1[i];
+  i++;
+  k++;
+}
+while(j<arr2.length){
+  arr[k]=arr2[j];
+  j++;
+  k++;
+}
+
+}
+function mergesort(arr,l,r){
+if(l>=r){
+return;
+}
+var m=l+parseInt((r-l)/2);
+
+mergesort(arr,l,m);
+mergesort(arr,m+1,r);
+
+merge(arr,l,m,r);
+
+
+}
+
+
+function sort( arr){
+  var arrstr=[];
+  for(let num of arr){
+
+    if(num.localeCompare(",")!=0 && num.localeCompare("[")!=0 && num.localeCompare("]")!=0 && num.localeCompare(" ")!=0 ){
+     arrstr.push(parseInt(num));
+    
+    }
+
+  }
+
+  var l=0;
+  var r=arrstr.length-1;
+ mergesort(arrstr,l,r);
+  return arrstr;
+
+
+} 
+  function arr_str(arr){
+   var strr="";   
+   for(let s of arr){
+    strr=strr+"-"+s;
+
+   }
+   return strr;
+ }   
+var arr = [1, 9, 8, 5, 6, 7];
+var sortedarr; 
+
+ document.getElementById("btn").onclick= function show (){
+    arr=document.getElementById("array").value;
+    sortedarr=arr_str(sort(arr));
+     
+   
+
+    document.getElementById("sh").innerHTML="Sorted array \n"+"["+sortedarr+"]";
+ };
+ 
+</script>
+
+</body>
+
+
+
+
+
+
+
+
+</html>
